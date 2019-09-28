@@ -4,7 +4,7 @@ class Star{
         this.x = x;
         this.y = y;
         this.radius= radius;
-        this.destroyed = false;
+        this.destroyed = 0;
         
     }
     
@@ -12,16 +12,19 @@ class Star{
     {
         ctx.beginPath();
         ctx.color
-        if(this.destroyed != false && this.destroyed < 5)
+        if(this.destroyed != 0 && this.destroyed < 5)
         {
             this.drawSparkles();
         }
-        else
+        else if(this.destroyed == 0)
         {
             this.drawCircles();
-            if(Math.random() < percent)
-                this.destroyed = 0;
+            if((Math.random()*100.0) < percent)
+                this.destroyed = 0.0000001;
         }
+		else
+			//Do nothing
+			this.destroyed++;
     }
     drawCircles()
     {
@@ -35,17 +38,15 @@ class Star{
     drawSparkles()
     {
         this.destroyed += 0.1;
-        let sparkleRadius = radius*2;
-        let sparkleCount = Math.round(this.radius/20);
+        let sparkleRadius = this.radius*3;
+        let sparkleCount = Math.round(this.radius);
         ctx.fillStyle = "white";
         let i;
         for(i =0;i<sparkleCount;i++){
             ctx.beginPath();
-            let xOffset = Math.cos(angle)*sparkleRadius*Math;
-            vector[1] = Math.sin(angle)*sparkleRadius;
             let xOffSet = sparkleRadius*(Math.random()-0.5);
             let yOffSet = sparkleRadius*(Math.random()-0.5);
-            ctx.arc(this.x+xOffset,this.y+yOffSet,this.radius/10,0,Math.PI*2);
+            ctx.arc(this.x+xOffSet,this.y+yOffSet,1,0,Math.PI*2);
             ctx.closePath();
             ctx.fill();
         }

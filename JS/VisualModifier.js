@@ -1,9 +1,10 @@
 let stars = [];
 function initStars()
 {
-    let min = 5;
-    let max = 25;
-    for(let i = 0; i<20; i++)
+    let min = 3;
+    let max = 10;
+	let count = Math.round(Math.random()*250);
+    for(let i = 0; i<count; i++)
     {
         stars[i] = new Star(Math.random()*ctx.canvas.width,Math.random()*ctx.canvas.height,Math.random()*(max-min)+min);
     }
@@ -55,9 +56,24 @@ function updateVisualization(data)
         
         let pixel = Math.round(percentFinished*1000);
         let color = offScreenCtx.getImageData(pixel,0,1,1).data
+		
+		let radius = 100;
+		if(percentFinished < .8)
+		{
+			radius = startRadius+(maxRadius-startRadius)*(1.25)*percentFinished;
+		}
+		else if(percentFinished < .9)
+		{
+			radius = maxRadius-((maxRadius-minRadius)*10*(percentFinished-0.8));
+		}
+		else
+		{
+			radius = minRadius*(1+((percentFinished-.9)*1000));
+		}
+		
         ctx.fillStyle = "rgb("+color[0]+","+color[1]+","+color[2]+","+color[3]+")";
         ctx.beginPath();
-        ctx.arc(640,480,100,0,2*Math.PI);
+        ctx.arc(640,480,radius,0,2*Math.PI);
         ctx.closePath();
         ctx.fill();
         
