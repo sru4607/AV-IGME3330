@@ -1,6 +1,6 @@
 
 
-const NUM_SAMPLES = 32;
+const NUM_SAMPLES = 256;
 
 let highshelf = false;
 let lowshelf = false;

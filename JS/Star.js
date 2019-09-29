@@ -52,6 +52,7 @@ class Star{
         }
         
     }
+    
 }
 import {ctx} from "./main.js"
 export {Star};
