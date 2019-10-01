@@ -5,6 +5,8 @@ class Star{
         this.y = y;
         this.radius= radius;
         this.destroyed = 0;
+		this.destroyedPercent = -1;
+		this.toBeDestroyed = false;
         
     }
     
@@ -12,19 +14,46 @@ class Star{
     {
         ctx.beginPath();
         ctx.color
-        if(this.destroyed != 0 && this.destroyed < 5)
-        {
-            this.drawSparkles();
-        }
-        else if(this.destroyed == 0)
-        {
-            this.drawCircles();
-            if((Math.random()*100.0) < percent)
-                this.destroyed = 0.0000001;
-        }
+		if(percent < this.destroyedPercent)
+		{
+			this.destroyed = 0;
+			this.toBeDestroyed = true;
+		}
+		if(this.toBeDestroyed)
+		{
+			if(this.destroyedPercent > percent)
+			{
+				this.drawCircles();
+			}
+			else if(this.destroyed == 0 && percent >= this.destroyedPercent)
+			{
+				this.destroyed = 0.0001;
+				this.drawSparkles();
+			}
+			else if(this.destroyed < 5)
+			{
+				this.drawSparkles();
+				this.destroyed++;
+			}
+		}
 		else
-			//Do nothing
-			this.destroyed++;
+		{
+			if(this.destroyed != 0 && this.destroyed < 5)
+			{
+				this.drawSparkles();
+			}
+			else if(this.destroyed == 0)
+			{
+				this.drawCircles();
+				if((Math.random()*100.0) < percent){
+					this.destroyedPercent =percent;
+					this.destroyed = 0.0000001;
+				}	
+			}
+			else
+				//Do nothing
+				this.destroyed++;
+		}
     }
     drawCircles()
     {
