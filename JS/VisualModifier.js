@@ -9,16 +9,20 @@ function initStars() {
     }
 }
 function initCircles() {
-    circleForms[0] = new CircleForm(0,5);
+    circleForms[0] = new CircleForm(0,100);
 	circleForms[1] = new CircleForm(Math.PI/2,20);
 	circleForms[2] = new CircleForm(Math.PI,35);
 	circleForms[3] = new CircleForm(3*Math.PI/2,50);
 }
 function updateCircleForms(data,radius,color)
 {
+	if(circleForms.length >= 1)
+	{
+		circleForms[0].drawWidth(ctx,data,radius,color);
+	}
 	for(let i = 0; i<circleForms.length; i++)
 	{
-		circleForms[i].drawWidth(ctx,data,radius,color)
+		circleForms[i].draw(ctx,data,radius,color)
 	}
 }
 function updateStars(percent) {

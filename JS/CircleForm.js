@@ -45,24 +45,28 @@ class CircleForm{
 		ctx.lineWidth = 3;
 		ctx.beginPath();
         for (var i = 0; i < data.length; i++) {
-			point.x = Math.cos(angle)*(radius + this.spacing+data[i]*0.2);
-			point.y = Math.sin(angle)*(radius + this.spacing+data[i]*0.2);
+			point.x = Math.cos(angle)*(radius + this.spacing);
+			point.y = Math.sin(angle)*(radius + this.spacing);
 			angle += (Math.PI * 2/data.length);
             if(i == 0)
 			{
-				previousPoint = point;
+				previousPoint.x = point.x;
+				previousPoint.y = point.y;
+				ctx.moveTo(point.x,point.y)
 				continue;
 			}
 			else
 			{
-				ctx.moveTo(previousPoint.x,previousPoint.y)
 				ctx.lineTo(point.x,point.y);
 				ctx.lineWidth = data[i]*0.2;
 				ctx.stroke();
-				ctx.closePath();
+				
 			}
-			previousPoint = point;
+			previousPoint.x = point.x;
+			previousPoint.y = point.y;
         }
+		ctx.closePath();
+		ctx.stroke();
 		ctx.restore();
 	}
 
