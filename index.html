@@ -7,24 +7,33 @@
 	<script type="text/javascript" src="dat.gui.min.js"></script>
 </head>
 <body>
-      <span><label for="highshelfCB">Highshelf Filter (Treble)</label><input type="checkbox" id="highshelfCB"></span>
-      <span><label for="lowshelfCB">Lowshelf Filter (Bass)</label><input type="checkbox" id="lowshelfCB"></span>
-      <span><label for="distortionCB">Distortion</label><input type="checkbox" id="distortionCB"></span>
-      <span>0 <input type="range" min="0" max="100" value="0" id="distortionSlider"> 100</span>
-      <span id="AudioSelectorDiv">
-		<input id="AudioSelector" type="radio" name="track" value="Peanut">Peanut Theme<br>
-      	<input id="AudioSelector" type="radio" name="track" value="NewAdventure">New Adventure<br>
-      	<input id="AudioSelector" type="radio" name="track" value="Picard">Picard<br>
-		</span>
-   		<section>
-			<span><input id="tintCB" type="checkbox" /><label for="tintCB">Red Tint</label></span>
-			<span><input id="invertCB" type="checkbox" /><label for="invertCB">Invert</label></span>
-			<span><input id="noiseCB" type="checkbox" /><label for="noiseCB">Noise</label></span>
-			<span><input id="sepiaCB" type="checkbox" /><label for="sepiaCB">Sepia</label></span>
-		</section>
+	<div id='audioControls'>
+		<h3>Audio Effects:</h3>
+			<span></span><label for="highshelfCB">Highshelf Filter (Treble)</label><input type="checkbox" id="highshelfCB"></span>
+			<span><label for="lowshelfCB">Lowshelf Filter (Bass)</label><input type="checkbox" id="lowshelfCB"></span>
+			<span><label for="distortionCB">Distortion</label><input type="checkbox" id="distortionCB"></span>
+			<span>0 <input type="range" min="0" max="100" value="0" id="distortionSlider"> 100</span>
+			<br><span id="AudioSelectorDiv">
+				<h3>Song:</h3>
+			  <input id="AudioSelector" type="radio" name="track" value="Peanut">Peanut Theme<br>
+				<input id="AudioSelector" type="radio" name="track" value="NewAdventure">New Adventure<br>
+				<input id="AudioSelector" type="radio" name="track" value="Picard">Picard<br>
+			  </span>
+				 <section>
+					<h3>Visual Effects</h3>
+				  <span><input id="tintCB" type="checkbox" /><label for="tintCB">Red Tint</label></span>
+				  <span><input id="invertCB" type="checkbox" /><label for="invertCB">Invert</label></span>
+				  <span><input id="noiseCB" type="checkbox" /><label for="noiseCB">Noise</label></span>
+				  <span><input id="sepiaCB" type="checkbox" /><label for="sepiaCB">Sepia</label></span>
+			  </section>
+			  
+			  
+			  
+	</div>
+	
     <div id="CanvasAndControls">
+		<button id="FullScreenToggle">FullScreen</button> 
     	<canvas id="mainCanvas" width="1280" height="960"></canvas>
-		<button id="FullScreenToggle">FullScreen</button>
    		<audio controls src="Media/Audio/Peanuts%20Theme.mp3"></audio>
     </div>
     

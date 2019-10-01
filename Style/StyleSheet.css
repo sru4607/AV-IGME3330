@@ -1,22 +1,23 @@
 canvas{border:1px solid black;display:block;}
-*{font-family:sans-serif;}
+*{font-family:sans-serif; color: #d4c2fc}
 span{margin-right:2em;}
 #distortionSlider{position:relative;top:.7em;}
+#audioControls{
+	display: inline;
+}
 #CanvasAndControls{
+	display: inline;
 	position: relative;
 }
 #mainCanvas{
 	position: absolute;
-	width = 100%;
-	height = 100%;
 }
 #FullScreenToggle{
 	width: 90px;
 	height: 45px;
 	position: absolute;
 	text-overflow: ellipsis;
-	left: 20px;
-	top: 20px;
+
 }
 #AudioSelectorDiv{
 	display: inline-block;
@@ -27,5 +28,8 @@ audio{
 	left: 20px;
 }
 body{
-	background-color: gray;
+	background-color: #323031;
+}
+h3{
+	color: #72B01D;
 }
