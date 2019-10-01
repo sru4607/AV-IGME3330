@@ -84,23 +84,14 @@ function updateVisualization(data) {
         ctx.closePath();
         ctx.fill();
 
-        //draw rectangles
-        let rot = 0;
-        let barWidth = 3;
-        let barHeight = 6;
-        for (var i = 0; i < data.length; i++) {
-            ctx.save();
-            ctx.fillStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + "," + color[3] + ")";
+       	updateCircleForms(data,radius,color);
 
-            ctx.translate(640, 480);
-            ctx.rotate((Math.PI * 2 * (2*i / (data.length))) + (rot -= .01));
 
-            ctx.beginPath();
-            ctx.fillRect(0, radius, barWidth - 2, barHeight + data[i] * .2);
-            ctx.restore();
-        }
+
+
     }
 }
+
 
 import { ctx } from "./main.js";
 import { Star } from "./Star.js"
