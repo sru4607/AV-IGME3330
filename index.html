@@ -8,7 +8,30 @@
         *{font-family:sans-serif;}
         span{margin-right:2em;}
         #distortionSlider{position:relative;top:.7em;}
+		#CanvasAndControls{
+			position: relative;
+		}
+		#mainCanvas{
+			position: absolute;
+			width = 100%;
+			height = 100%;
+		}
+		#FullScreenToggle{
+			width: 90px;
+			height: 45px;
+			position: absolute;
+			text-overflow: ellipsis;
+			left: 20px;
+			top: 20px;
+		}
+		audio{
+			position:absolute;
+			bottom: 20px;
+			left: 20px;
+		}
+		
 	</style>
+	<script type="text/javascript" src="dat.gui.min.js"></script>
 </head>
 <body>
     <p>
@@ -17,13 +40,30 @@
       <span><label for="distortionCB">Distortion</label><input type="checkbox" id="distortionCB"></span>
       <span>0 <input type="range" min="0" max="100" value="0" id="distortionSlider"> 100</span>
     </p>
-    <canvas width="1280" height="960"></canvas>
+    <div id="CanvasAndControls">
+    	<canvas id="mainCanvas" width="1280" height="960"></canvas>
+		<button id="FullScreenToggle">FullScreen</button>
+   <audio controls src="Media/Audio/Peanuts%20Theme.mp3"></audio>
+    </div>
+    
 
     <!-- use obama-oilspill.mp3 or human-voice.mp3 -->
-    <audio controls src="Media/Audio/Peanuts%20Theme.mp3"></audio>
     <script type="module" src="JS/AudioControl.js"></script>
     <script type="module" src="JS/main.js"></script>
     <script type="module" src="JS/VisualModifier.js"></script>
-
+    <script>
+	
+	document.querySelector("#FullScreenToggle").onclick = function(){
+		if(document.fullscreenElement != null)
+		{
+			document.exitFullscreen();
+		}
+		else
+		{
+			document.querySelector("#CanvasAndControls").requestFullscreen();
+		}
+	};
+	
+	</script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 let stars = [];
+let circleForms = [];
 function initStars() {
     let min = 3;
     let max = 10;
@@ -6,6 +7,19 @@ function initStars() {
     for (let i = 0; i < count; i++) {
         stars[i] = new Star(Math.random() * ctx.canvas.width, Math.random() * ctx.canvas.height, Math.random() * (max - min) + min);
     }
+}
+function initCircles() {
+    circleForms[0] = new CircleForm(0,5);
+	circleForms[1] = new CircleForm(Math.PI/2,20);
+	circleForms[2] = new CircleForm(Math.PI,35);
+	circleForms[3] = new CircleForm(3*Math.PI/2,50);
+}
+function updateCircleForms(data,radius,color)
+{
+	for(let i = 0; i<circleForms.length; i++)
+	{
+		circleForms[i].drawWidth(ctx,data,radius,color)
+	}
 }
 function updateStars(percent) {
     for (let i = 0; i < stars.length; i++) {
@@ -15,6 +29,9 @@ function updateStars(percent) {
 function updateVisualization(data) {
     if (stars.length == 0) {
         initStars();
+    }
+	if (circleForms.length == 0) {
+        initCircles();
     }
     let audioElement = document.querySelector("audio");
     if (!audioElement.paused) {
@@ -41,7 +58,7 @@ function updateVisualization(data) {
         gradient.addColorStop(.8, "rgb(247,27,0)"); //Red
         gradient.addColorStop(.9, "rgb(247,156,0)"); //Orange
         gradient.addColorStop(.91, "rgb(237,237,237)"); //White
-        gradient.addColorStop(1, "rgb(117,253,255)"); //blue
+        gradient.addColorStop(.925, "rgb(150,200,255)"); //blue
 
         offScreenCtx.fillStyle = gradient;
 
@@ -58,7 +75,7 @@ function updateVisualization(data) {
             radius = maxRadius - ((maxRadius - minRadius) * 10 * (percentFinished - 0.8));
         }
         else {
-            radius = minRadius * (1 + ((percentFinished - .9) * 1000));
+            radius = minRadius * (1 + ((percentFinished - .9) * 500));
         }
 
         ctx.fillStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + "," + color[3] + ")";
@@ -87,4 +104,5 @@ function updateVisualization(data) {
 
 import { ctx } from "./main.js";
 import { Star } from "./Star.js"
+import {CircleForm} from "./CircleForm.js"
 export { updateVisualization };
