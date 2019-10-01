@@ -94,8 +94,19 @@ function updateVisualization(data) {
 
        	updateCircleForms(data,radius,color);
 
-
-
+		
+		ctx.moveTo(10,ctx.canvas.height-10);
+		let toMove = (ctx.canvas.width-20)/data.length;
+		ctx.beginPath();
+		for(let d = 0; d<data.length; d++)
+		{
+			ctx.lineTo(10+toMove*d,ctx.canvas.height-20-data[d]);
+		}
+		ctx.stroke();
+		ctx.lineTo(ctx.canvas.width-10,ctx.canvas.height-10);
+		ctx.lineTo(10,ctx.canvas.height - 10);
+		ctx.closePath();
+		ctx.fill();
 
     }
 }
