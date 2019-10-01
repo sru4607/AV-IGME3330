@@ -26,7 +26,7 @@ function updateVisualization(data) {
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-        //updateStars(percentFinished);
+        updateStars(percentFinished);
         //console.log(audioElement.duration);
         //console.log(audioElement.currentTime);
         let maxRadius = 250;
@@ -76,21 +76,13 @@ function updateVisualization(data) {
             ctx.fillStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + "," + color[3] + ")";
 
             ctx.translate(640, 480);
-            ctx.rotate((Math.PI * 2 * (2*i / (data.length))) + (rot -= .00002));
+            ctx.rotate((Math.PI * 2 * (2*i / (data.length))) + (rot -= .01));
 
             ctx.beginPath();
             ctx.fillRect(0, radius, barWidth - 2, barHeight + data[i] * .2);
             ctx.restore();
         }
-
-
-
-
     }
-}
-function drawRectangles(data, barWidth, barHeight) {
-    // loop through the data and draw!
-
 }
 
 import { ctx } from "./main.js";
