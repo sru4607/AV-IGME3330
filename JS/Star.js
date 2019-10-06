@@ -86,16 +86,20 @@ class Star{
 	drawRectangles(data){
 
 
-		
+		//pulse effect
 		let avg =0;
 		for(let i = 0; i < data.length; i++){
-			avg += data[i];
+			avg += data[i]; //avg of data
 		}
 		avg /= data.length;
-		let k = avg * 0.3;
-		let l = this.radius - 3;
+		//
+		let k = avg * 0.3; //arc endpoint 
+		let l = this.radius - 3; //arc midpoint
+
 		ctx.save();
+		ctx.lineWidth = 2;
 		ctx.strokeStyle = 'white';
+		ctx.fillStyle = 'white';
 		ctx.beginPath();
 		ctx.moveTo(this.x + k, this.y);
 		ctx.quadraticCurveTo(this.x + l, this.y - l, this.x, this.y-k); //QUAD 1
@@ -107,25 +111,9 @@ class Star{
 		ctx.quadraticCurveTo(this.x + l, this.y + l, this.x + k, this.y); //QUAD 4
 		ctx.moveTo(this.x + k, this.y);
 		ctx.closePath();
+		//ctx.fill();
 		ctx.stroke();
 		ctx.restore();
-		/*
-		// vars for sound bars
-		var barWidth = this.radius;
-		var barHeight = 0.5;
-		let rot = 0;
-		let numBars = 4;
-		// loop through the data and draw
-		for(let i = 0; i < numBars ; i++){
-			ctx.save();
-			ctx.fillStyle = 'white';
-			ctx.translate(this.x, this.y);
-			ctx.rotate((Math.PI * 2 * (i / (numBars))) + (rot -= .01));
-			ctx.beginPath();
-			ctx.fillRect(0,this.radius,barWidth, barHeight+data[i]*.1);
-			ctx.restore();
-		}
-		*/
 	}
 			
 	
