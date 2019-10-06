@@ -6,6 +6,7 @@ function initStars() {
     let count = Math.round(Math.random() * 250);
     for (let i = 0; i < count; i++) {
         stars[i] = new Star(Math.random() * ctx.canvas.width, Math.random() * ctx.canvas.height, Math.random() * (max - min) + min);
+        //stars[i] = new Star(Math.random() * ctx.canvas.width, Math.random() * ctx.canvas.height,5);
     }
 }
 function initCircles() {
