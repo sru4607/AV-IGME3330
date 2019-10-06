@@ -7,13 +7,12 @@ class Star{
         this.destroyed = 0;
 		this.destroyedPercent = -1;
 		this.toBeDestroyed = false;
-        
+        this.burnOut = false;
     }
     
     draw(percent)
     {
-        ctx.beginPath();
-        ctx.color
+		ctx.beginPath();
 		if(percent < this.destroyedPercent)
 		{
 			this.destroyed = 0;
@@ -79,8 +78,28 @@ class Star{
             ctx.closePath();
             ctx.fill();
         }
+        this.burnOut = true;
         
-    }
+	}
+	drawRectangles(data){
+		// vars for sound bars
+		var barWidth = 1;
+		var barHeight = 0.5;
+		let rot = 0;
+		let numBars = 4;
+		// loop through the data and draw
+		for(let i = 0; i < numBars ; i++){
+			ctx.save();
+			ctx.fillStyle = 'white';
+			ctx.translate(this.x, this.y);
+			ctx.rotate((Math.PI * 2 * (i / (numBars)))+ (rot -= .01));
+			ctx.beginPath();
+			ctx.fillRect(0,this.radius,barWidth, barHeight+data[i]*.1);
+			ctx.restore();
+		}
+			
+	}
+   
     
 }
 import {ctx} from "./main.js"

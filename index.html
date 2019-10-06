@@ -3,51 +3,20 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Web Audio 2</title>
-	<link rel="stylesheet" type="text/css" href="Style/StyleSheet.css">
-	<script type="text/javascript" src="dat.gui.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="Style/StyleSheet.css">
+
 </head>
-<body>
-      <span><label for="highshelfCB">Highshelf Filter (Treble)</label><input type="checkbox" id="highshelfCB"></span>
-      <span><label for="lowshelfCB">Lowshelf Filter (Bass)</label><input type="checkbox" id="lowshelfCB"></span>
-      <span><label for="distortionCB">Distortion</label><input type="checkbox" id="distortionCB"></span>
-      <span>Distortion: 0 <input type="range" min="0" max="100" value="0" id="distortionSlider"> 100</span>
-      <span>Stars: 0 <input type="range" min="0" max="250" value="0" id="starSlider"> 250</span>
-      <span>Max Radius: 0 <input type="range" min="0" max="100" value="0" id="MaxRadius"> 100</span>
-      <span id="AudioSelectorDiv">
-		<input id="AudioSelector" type="radio" name="track" value="Peanut">Peanut Theme<br>
-      	<input id="AudioSelector" type="radio" name="track" value="NewAdventure">New Adventure<br>
-      	<input id="AudioSelector" type="radio" name="track" value="Picard">Picard<br>
-		</span>
-   		<section>
-			<span><input id="tintCB" type="checkbox" /><label for="tintCB">Red Tint</label></span>
-			<span><input id="invertCB" type="checkbox" /><label for="invertCB">Invert</label></span>
-			<span><input id="noiseCB" type="checkbox" /><label for="noiseCB">Noise</label></span>
-			<span><input id="sepiaCB" type="checkbox" /><label for="sepiaCB">Sepia</label></span>
-		</section>
+<body>	
     <div id="CanvasAndControls">
+		<button id="FullScreenToggle">FullScreen</button> 
     	<canvas id="mainCanvas" width="1280" height="960"></canvas>
-		<button id="FullScreenToggle">FullScreen</button>
    		<audio controls src="Media/Audio/Peanuts%20Theme.mp3"></audio>
     </div>
     
+    <script type="text/javascript" src="./JS/dat.gui.min.js"></script>
+    <script type="module" src="./JS/Loader.js"></script>
 
-    <!-- use obama-oilspill.mp3 or human-voice.mp3 -->
-    <script type="module" src="JS/AudioControl.js"></script>
-    <script type="module" src="JS/main.js"></script>
-    <script type="module" src="JS/VisualModifier.js"></script>
-    <script>
-	
-	document.querySelector("#FullScreenToggle").onclick = function(){
-		if(document.fullscreenElement != null)
-		{
-			document.exitFullscreen();
-		}
-		else
-		{
-			document.querySelector("#CanvasAndControls").requestFullscreen();
-		}
-	};
-	
-	</script>
+    
+
 </body>
 </html>

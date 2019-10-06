@@ -4,16 +4,44 @@ const BAR_WIDTH = 30;
 const MAX_BAR_HEIGHT = 100;
 const PADDING = 4;
 const MIDDLE_Y = ctx.canvas.height/2;
-let tintRed;
-let invert;
-let noise;
-let sepia;
+let controlValue = {
+    tintRed: false,
+    invert: true,
+    noise: false,
+    sepia: false,
+    HighShelf: false,
+    LowShelf: false,
+    Distort: false,
+    DistortionAmount: 50,
+    song: "Peanut"   
+};
+let guiControllers = {};
 
-setupUI();
-setupUIBoxes();
-update();
-
-
+function init(){
+    document.querySelector("#FullScreenToggle").onclick = function(){
+    if(document.fullscreenElement != null)
+    {
+        document.exitFullscreen();
+    }
+    else
+    {
+        document.querySelector("#CanvasAndControls").requestFullscreen();
+    }
+    }
+    let gui = new dat.GUI();
+    guiControllers.TintRed = gui.add(controlValue, "tintRed");
+    guiControllers.Invert = gui.add(controlValue, "invert");
+    guiControllers.Noise = gui.add(controlValue, "noise");
+    guiControllers.Sepia = gui.add(controlValue, "sepia");
+    guiControllers.High = gui.add(controlValue, "HighShelf");
+    guiControllers.Low = gui.add(controlValue, "LowShelf");
+    guiControllers.Distort = gui.add(controlValue, "Distort");
+    guiControllers.DistortionAmount = gui.add(controlValue, "DistortionAmount",0,100);
+    guiControllers.song = gui.add(controlValue, "song",["Picard","New Adventure","Peanut"]);
+    
+    setupUI();
+    update();
+}
 
 
 function update() { 
@@ -21,28 +49,16 @@ function update() {
   requestAnimationFrame(update);
   // 9 - create a new array of 8-bit integers (0-255)
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
-  let data = new Uint8Array(analyserNode.frequencyBinCount); // OR analyserNode.fftSize/2
+  let data = new Uint8Array(audioNodes.analyserNode.frequencyBinCount); // OR analyserNode.fftSize/2
 
   // 10 - populate the array with the frequency data
   // notice these arrays are passed *by reference*
-  analyserNode.getByteFrequencyData(data);
+  audioNodes.analyserNode.getByteFrequencyData(data);
 
-  updateVisualization(data);
+  updateVisualization(data, audioNodes.analyserNode.frequencyBinCount);
   manipulatePixels(ctx);
 }
-function setupUIBoxes(){
-			document.querySelector('#tintCB').checked = tintRed;
-			document.querySelector('#invertCB').checked = invert;
-			document.querySelector('#noiseCB').checked = noise;
-			document.querySelector('#sepiaCB').checked = sepia;
 
-			
-			document.querySelector('#tintCB').onchange = e => tintRed = e.target.checked;
-			document.querySelector('#invertCB').onchange = e => invert = e.target.checked;
-			document.querySelector('#noiseCB').onchange = e => noise = e.target.checked;
-			document.querySelector('#sepiaCB').onchange = e => sepia = e.target.checked;
-
-}
 
 function manipulatePixels(ctx){
 			
@@ -54,22 +70,22 @@ function manipulatePixels(ctx){
 
 	let i;
 	for(i = 0; i<length; i+=4){
-		if(tintRed){
+		if(controlValue.tintRed){
 			data[i] = data[i] + 100;
 		}
-		if(invert)
+		if(controlValue.invert)
 		{
 			let red = data[i],green = data[i+1],blue = data[i+2];
 			data[i] = 255-red;
 			data[i+1] = 255-green;
 			data[i+2] = 255-blue;
 		}
-		if(noise && Math.random() < 0.10)
+		if(controlValue.noise && Math.random() < 0.10)
 		{
 			data[i] = data[i+1] = data[i+2] = 128;
 			data[i+3] = 255;
 		}
-		if(sepia){
+		if(controlValue.sepia){
 			let red = data[i],green = data[i+1],blue = data[i+2];
 			data[i] = Math.min(255,(0.393*red)+(0.768*green)+(0.189*blue));
 			data[i+1] = Math.min(255,(0.349*red)+(0.686*green)+(0.168*blue));
@@ -81,6 +97,6 @@ function manipulatePixels(ctx){
 	ctx.putImageData(imageData,0,0);
 			
 }
-import {setupUI,analyserNode} from './AudioControl.js';
+import {setupUI,audioNodes} from './AudioControl.js';
 import {updateVisualization} from './VisualModifier.js';
-export {ctx};
+export {guiControllers,controlValue, ctx, init};

@@ -25,12 +25,16 @@ function updateCircleForms(data,radius,color)
 		circleForms[i].draw(ctx,data,radius,color)
 	}
 }
-function updateStars(percent) {
+function updateStars(percent, data) {
     for (let i = 0; i < stars.length; i++) {
         stars[i].draw(percent);
+        if(!stars[i].burnOut){
+            stars[i].drawRectangles(data);
+        }
+       
     }
 }
-function updateVisualization(data) {
+function updateVisualization(data , integerVal) {
     if (stars.length == 0) {
         initStars();
     }
@@ -47,7 +51,7 @@ function updateVisualization(data) {
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-        updateStars(percentFinished);
+        updateStars(percentFinished, data);
         //console.log(audioElement.duration);
         //console.log(audioElement.currentTime);
         let maxRadius = 250;
@@ -90,9 +94,9 @@ function updateVisualization(data) {
 
        	updateCircleForms(data,radius,color);
 
-		
+		//Waveform
 		ctx.moveTo(10,ctx.canvas.height-10);
-		let toMove = (ctx.canvas.width-20)/data.length;
+		let toMove = (ctx.canvas.width-20)/integerVal;
 		ctx.beginPath();
 		for(let d = 0; d<data.length; d++)
 		{
