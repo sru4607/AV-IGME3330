@@ -111,7 +111,7 @@ class Star{
 		//ctx.fill();
 		ctx.stroke();
 		ctx.restore();
-   
+	}
     
 }
 import {ctx} from "./main.js"
