@@ -17,10 +17,7 @@ function initCircles() {
 }
 function updateCircleForms(data,radius,color)
 {
-	if(circleForms.length >= 1)
-	{
-		circleForms[0].drawWidth(ctx,data,radius,color);
-	}
+
 	for(let i = 0; i<circleForms.length; i++)
 	{
 		circleForms[i].draw(ctx,data,radius,color)
@@ -51,7 +48,7 @@ function updateVisualization(data , integerVal) {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
+		ctx.drawImage(imageBack,0,0);
         updateStars(percentFinished, data);
         //console.log(audioElement.duration);
         //console.log(audioElement.currentTime);
@@ -116,4 +113,5 @@ function updateVisualization(data , integerVal) {
 import { ctx } from "./main.js";
 import { Star } from "./Star.js"
 import {CircleForm} from "./CircleForm.js"
+import {imageBack} from "./Loader.js";
 export { updateVisualization };
