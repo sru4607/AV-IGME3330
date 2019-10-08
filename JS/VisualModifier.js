@@ -71,7 +71,7 @@ function updateVisualization(data , integerVal) {
         offScreenCtx.fillRect(0, 0, 1000, 20);
 
         let pixel = Math.round(percentFinished * 1000);
-        let color = offScreenCtx.getImageData(pixel, 0, 1, 1).data
+        let color = offScreenCtx.getImageData(pixel, 0, 1, 1).data;
 
         let radius = 100;
         if (percentFinished < .8) {
@@ -85,11 +85,20 @@ function updateVisualization(data , integerVal) {
         }
 
         ctx.fillStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + "," + color[3] + ")";
+        //draw main circle
+        ctx.save();
+        let colorString = "rgb(" + color[0] + "," + color[1] + "," + color[2] + "," + color[3] + ")"; //creates a color string for corresponding color
+        var grd = ctx.createRadialGradient(ctx.canvas.width/2, ctx.canvas.height/2, radius, 90, 60, 100); //create gradient (needs tweaking)
+        //color stops
+        grd.addColorStop(0, colorString);
+        grd.addColorStop(1, "white");
+        //
+        ctx.fillStyle = grd;
         ctx.beginPath();
         ctx.arc(640, 480, radius, 0, 2 * Math.PI);
         ctx.closePath();
         ctx.fill();
-
+        ctx.restore();
        	updateCircleForms(data,radius,color);
 
 		//Waveform
