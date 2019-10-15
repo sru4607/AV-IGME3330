@@ -110,6 +110,14 @@ function manipulatePixels(ctx){
 
 		}
 	}
+	if(controlValue.emboss)
+	{
+		for(i = 0; i<data.length;i++)
+		{
+			if(i%3==0) continue;
+			data[i] = 127+2*data[i] - data[i+4] - data[i+width*4];
+		}
+	}
 
 	ctx.putImageData(imageData,0,0);
 			
