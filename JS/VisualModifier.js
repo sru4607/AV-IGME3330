@@ -1,5 +1,6 @@
 let stars = [];
 let circleForms = [];
+//Initializes the stars
 function initStars() {
     let min = 3;
     let max = 10;
@@ -9,29 +10,28 @@ function initStars() {
         //stars[i] = new Star(Math.random() * ctx.canvas.width, Math.random() * ctx.canvas.height,5);
     }
 }
+//Initializaes the circles around the center sun
 function initCircles() {
     circleForms[0] = new CircleForm(0,100);
 	circleForms[1] = new CircleForm(Math.PI/2,20);
 	circleForms[2] = new CircleForm(Math.PI,35);
 	circleForms[3] = new CircleForm(3*Math.PI/2,50);
 }
-function updateCircleForms(data,radius,color)
-{
+//Updates the circles around the center sun
+function updateCircleForms(data,radius,color){
 
 	for(let i = 0; i<circleForms.length; i++)
 	{
 		circleForms[i].draw(ctx,data,radius,color)
 	}
 }
+//Updates the stars
 function updateStars(percent, data) {
     for (let i = 0; i < stars.length; i++) {
-        stars[i].draw(percent);
-        if(!stars[i].burnOut){
-            stars[i].drawRectangles(data);
-        }
-       
+        stars[i].draw(percent,data);       
     }
 }
+//Updates what is being drawn to the canvas
 function updateVisualization(data , integerVal) {
     if (stars.length == 0) {
         initStars();
@@ -40,8 +40,8 @@ function updateVisualization(data , integerVal) {
         initCircles();
     }
     let audioElement = document.querySelector("audio");
-    if (!audioElement.paused) {
-
+    if (!audioElement.paused) 
+	{
         let offScreenCtx = new OffscreenCanvas(1000, 1).getContext("2d");
         let percentFinished = audioElement.currentTime / audioElement.duration;
 
@@ -71,7 +71,7 @@ function updateVisualization(data , integerVal) {
         offScreenCtx.fillRect(0, 0, 1000, 20);
 
         let pixel = Math.round(percentFinished * 1000);
-        let color = offScreenCtx.getImageData(pixel, 0, 1, 1).data
+        let color = offScreenCtx.getImageData(pixel, 0, 1, 1).data;
 
         let radius = 100;
         if (percentFinished < .8) {
@@ -85,11 +85,20 @@ function updateVisualization(data , integerVal) {
         }
 
         ctx.fillStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + "," + color[3] + ")";
+        //draw main circle
+        ctx.save();
+        let colorString = "rgb(" + color[0] + "," + color[1] + "," + color[2] + "," + color[3] + ")"; //creates a color string for corresponding color
+        let grd = ctx.createRadialGradient(ctx.canvas.width/2, ctx.canvas.height/2, radius, 90, 60, 100); //create gradient (needs tweaking)
+        //color stops
+        grd.addColorStop(0, colorString);
+        grd.addColorStop(1, "white");
+        //
+        ctx.fillStyle = grd;
         ctx.beginPath();
-        ctx.arc(640, 480, radius, 0, 2 * Math.PI);
+        ctx.arc(ctx.canvas.width/2, ctx.canvas.height/2, radius, 0, 2 * Math.PI);
         ctx.closePath();
         ctx.fill();
-
+        ctx.restore();
        	updateCircleForms(data,radius,color);
 
 		//Waveform
@@ -105,13 +114,24 @@ function updateVisualization(data , integerVal) {
 		ctx.lineTo(10,ctx.canvas.height - 10);
 		ctx.closePath();
 		ctx.fill();
+        
+		ctx.beginPath();
+		ctx.rect(0,0,ctx.canvas.width,ctx.canvas.height);
+		ctx.closePath();
+		ctx.strokeStyle = color;
+		ctx.lineWidth = 10;
+		ctx.stroke();
+        manipulatePixels(ctx);
 
     }
 }
+//Resets the visualization for a new song to play
+function Reset(){
+	
+}
 
-
-import { ctx } from "./main.js";
+import { ctx, manipulatePixels} from "./main.js";
 import { Star } from "./Star.js"
 import {CircleForm} from "./CircleForm.js"
 import {imageBack} from "./Loader.js";
-export { updateVisualization };
+export { updateVisualization, Reset };

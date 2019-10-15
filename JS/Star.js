@@ -7,10 +7,10 @@ class Star{
         this.destroyed = 0;
 		this.destroyedPercent = -1;
 		this.toBeDestroyed = false;
-        this.burnOut = false;
+        this.color = GetRandomColor();
     }
     
-    draw(percent)
+    draw(percent,data)
     {
 		ctx.beginPath();
 		if(percent < this.destroyedPercent)
@@ -43,24 +43,27 @@ class Star{
 			}
 			else if(this.destroyed == 0)
 			{
-				this.drawCircles();
+				this.drawCircles(data);
 				if((Math.random()*100.0) < percent){
 					this.destroyedPercent =percent;
 					this.destroyed = 0.0000001;
 				}	
 			}
-			else
+			else{
 				//Do nothing
 				this.destroyed++;
+			}
+				
 		}
     }
-    drawCircles()
+    drawCircles(data)
     {
-        ctx.fillStyle = "white";
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
         ctx.closePath();
         ctx.fill();
+        this.drawRect(data);
         
     }
     drawSparkles()
@@ -68,7 +71,7 @@ class Star{
         this.destroyed += 0.1;
         let sparkleRadius = this.radius*3;
         let sparkleCount = Math.round(this.radius);
-        ctx.fillStyle = "white";
+        ctx.fillStyle = this.color;
         let i;
         for(i =0;i<sparkleCount;i++){
             ctx.beginPath();
@@ -78,10 +81,9 @@ class Star{
             ctx.closePath();
             ctx.fill();
         }
-        this.burnOut = true;
         
 	}
-	drawRectangles(data){
+	drawRect(data){
 		
 		//pulse effect
 		let avg =0;
@@ -95,8 +97,8 @@ class Star{
 
 		ctx.save();
 		ctx.lineWidth = 2;
-		ctx.strokeStyle = 'white';
-		ctx.fillStyle = 'white';
+		ctx.strokeStyle = this.color;
+		ctx.fillStyle = this.color;
 		ctx.beginPath();
 		ctx.moveTo(this.x + k, this.y);
 		ctx.quadraticCurveTo(this.x + l, this.y - l, this.x, this.y-k); //QUAD 1
@@ -115,4 +117,5 @@ class Star{
     
 }
 import {ctx} from "./main.js"
+import {GetRandomColor} from "./Utility.js"
 export {Star};

@@ -8,7 +8,7 @@ let audioElement = document.querySelector('audio');
 // 2 - create a new `AudioContext` object
 // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
 let audioCtx = new (window.AudioContext || window.webkitAudioContext); // to support Safari and mobile
-
+audioNodes.context = audioCtx;
 // 3 - create a node that points at the <audio> element
 // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createMediaElementSource
 audioNodes.sourceNode = audioCtx.createMediaElementSource(audioElement); 
@@ -42,35 +42,35 @@ audioNodes.distortionFilter.connect(audioNodes.biquadFilter);
 audioNodes.biquadFilter.connect(audioNodes.lowShelfBiquadFilter);
 audioNodes.lowShelfBiquadFilter.connect(audioCtx.destination);
 
+document.querySelector("audio").onplay = startAudio;
 }
-function setupUI(){
-     guiControllers.High.onChange = toggleHighshelf;
-     guiControllers.Low.onChange = toggleLowshelf;
-     guiControllers.Distort.onChange = toggleDistortion;
-     guiControllers.DistortionAmount.onChange = toggleDistortion;
+function startAudio(){
+    audioNodes.context.resume();
+	
 }
 function toggleHighshelf(){
-  if(highshelf){
-    biquadFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
-    biquadFilter.gain.setValueAtTime(25, audioCtx.currentTime);
+
+  if(controlValue.HighShelf){
+    audioNodes.biquadFilter.frequency.setValueAtTime(1000, audioNodes.context.currentTime);
+   audioNodes.biquadFilter.gain.setValueAtTime(25, audioNodes.context.currentTime);
   }else{
-    biquadFilter.gain.setValueAtTime(0, audioCtx.currentTime);
+    audioNodes.biquadFilter.gain.setValueAtTime(0, audioNodes.context.currentTime);
   }
 }
 function toggleLowshelf(){
-  if(lowshelf){
-    lowShelfBiquadFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
-    lowShelfBiquadFilter.gain.setValueAtTime(15, audioCtx.currentTime);
+  if(controlValue.LowShelf){
+    audioNodes.lowShelfBiquadFilter.frequency.setValueAtTime(1000, audioNodes.context.currentTime);
+    audioNodes.lowShelfBiquadFilter.gain.setValueAtTime(15, audioNodes.context.currentTime);
   }else{
-    lowShelfBiquadFilter.gain.setValueAtTime(0, audioCtx.currentTime);
+    audioNodes.lowShelfBiquadFilter.gain.setValueAtTime(0, audioNodes.context.currentTime);
   }
 }
 function toggleDistortion(){
   if(controlValue.Distort){
-    distortionFilter.curve = null; // being paranoid and trying to trigger garbage collection
-    distortionFilter.curve = makeDistortionCurve(controlValue.DistortionAmount);
+    audioNodes.distortionFilter.curve = null; // being paranoid and trying to trigger garbage collection
+    audioNodes.distortionFilter.curve = makeDistortionCurve(controlValue.DistortionAmount);
   }else{
-    distortionFilter.curve = null;
+    audioNodes.distortionFilter.curve = null;
   }
 }
 // from: https://developer.mozilla.org/en-US/docs/Web/API/WaveShaperNode
@@ -82,5 +82,5 @@ function makeDistortionCurve(amount=20) {
   }
   return curve;
 }
-import {guiControllers, controlValue} from "./main.js"
-export {setupUI,audioNodes};
+import {controlValue} from "./main.js"
+export {audioNodes,toggleDistortion,toggleHighshelf,toggleLowshelf};

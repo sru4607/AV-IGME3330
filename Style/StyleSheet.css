@@ -1,6 +1,9 @@
 Canvas{border:1px solid black;display:block;}
-*{font-family:sans-serif; color: #d4c2fc}
+*{font-family: 'Fjalla One', sans-serif; color: orange}
 .SpanToEdit{margin-right:2em;}
+html,body{
+	height: 100%;
+}
 #distortionSlider{position:relative;top:.7em;}
 #audioControls{
 	display: inline;
@@ -22,10 +25,10 @@ Canvas{border:1px solid black;display:block;}
 #AudioSelectorDiv{
 	display: inline-block;
 }
-audio{
-	position:fixed;
+audio, #audioControls{
+	position: fixed;
 	bottom: 20px;
-	left: 20px;
+	right:20px;
 }
 body{
 	background-color: #323031;
@@ -35,4 +38,108 @@ h3{
 }
 button{
 	color: #72B01D;
+	position: fixed;
+	top: 20px;
+	right:20px;
+}
+h1{
+	padding-top: 1%;
+    color:white;
+}
+.title, .subtitle{
+	color: white;
+}
+
+input[type=checkbox]{
+	width: 24px;
+	height: 24px;
+}
+input[type=radio]{
+	width: 24px;
+	height: 24px;
+}
+p{
+	display: inline;
+}
+.red{
+	color: red;
+}
+.green{
+	color: green;
+}
+.blue{
+	color: blue;
+}
+
+/*
+	Hamburger Menu css from https://www.cssscript.com/basic-hamburger-toggle-menu-css-vanilla-javascript/
+*/
+
+.Control {
+  transition: left 0.5s ease;
+  background: #323031;
+  color: white;
+  cursor: pointer;
+  font-size: 2rem;
+  height: 100vh;
+  left: -20rem;
+  padding: 6rem 2rem 2rem 2rem;
+  position: fixed;
+  top: 0;
+  width: 20rem;
+  z-index: 1;
+}
+.Control.expanded { left: 0; }
+.Control ul {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Control-toggle {
+  user-select: none;
+  cursor: pointer;
+  height: 2rem;
+  left: 2rem;
+  position: fixed;
+  top: 2rem;
+  width: 3.6rem;
+  z-index: 2;
+}
+
+.Control-toggle:hover { opacity: 0.8; }
+
+.Control-toggle .Control-toggle-bar,  .Control-toggle .Control-toggle-bar::after,  .Control-toggle .Control-toggle-bar::before {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.5s ease;
+  background: white;
+  content: '';
+  height: 0.4rem;
+  width: 100%;
+}
+
+.Control-toggle .Control-toggle-bar { margin-top: 0; }
+
+.Control-toggle .Control-toggle-bar::after { margin-top: 0.8rem; }
+
+.Control-toggle .Control-toggle-bar::before { margin-top: -0.8rem; }
+
+.Control-toggle.expanded .Control-toggle-bar { background: transparent; }
+
+.Control-toggle.expanded .Control-toggle-bar::after, .Control-toggle.expanded .Control-toggle-bar::before {
+  background: white;
+  margin-top: 0;
+}
+
+.Control-toggle.expanded .Control-toggle-bar::after {
+  transform: rotate(45deg);
+}
+
+.Control-toggle.expanded .Control-toggle-bar::before {
+  transform: rotate(-45deg);
 }

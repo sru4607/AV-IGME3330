@@ -16,7 +16,7 @@ class CircleForm{
 		ctx.strokeStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + "," + color[3] + ")";
 		ctx.lineWidth = 3;
 		ctx.beginPath();
-        for (var i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
 			point.x = Math.cos(angle)*(radius + this.spacing+data[i]*0.2);
 			point.y = Math.sin(angle)*(radius + this.spacing+data[i]*0.2);
 			angle += (Math.PI * 2/data.length);
@@ -44,7 +44,7 @@ class CircleForm{
 		ctx.strokeStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + "," + color[3] + ")";
 		ctx.lineWidth = 3;
 		ctx.beginPath();
-        for (var i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
 			point.x = Math.cos(angle)*(radius + this.spacing);
 			point.y = Math.sin(angle)*(radius + this.spacing);
 			angle += (Math.PI * 2/data.length);

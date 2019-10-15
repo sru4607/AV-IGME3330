@@ -6,47 +6,65 @@ const PADDING = 4;
 const MIDDLE_Y = ctx.canvas.height/2;
 let controlValue = {
     tintRed: false,
-    invert: true,
+    invert: false,
     noise: false,
     sepia: false,
+	emboss: false,
+	tintR:125,
+	tintG:125,
+	tingB:125,
     HighShelf: false,
     LowShelf: false,
     Distort: false,
     DistortionAmount: 50,
     song: "Peanut"   
 };
-let guiControllers = {};
 
 function init(){
+	//Sets the hamburger menu functionality - code from: https://www.cssscript.com/basic-hamburger-toggle-menu-css-vanilla-javascript/
+	(function() {
+
+		let hamburger = {
+		ControlToggle: document.querySelector('.Control-toggle'),
+		Control: document.querySelector('nav'),
+
+		doToggle: function(e) {
+			e.preventDefault();
+			this.ControlToggle.classList.toggle('expanded');
+			this.Control.classList.toggle('expanded');
+			}
+		};
+
+		hamburger.ControlToggle.addEventListener('click', function(e) { hamburger.doToggle(e); });
+	}());
+	//Sets the canvas element to be fullscreen
     document.querySelector("#FullScreenToggle").onclick = function(){
     if(document.fullscreenElement != null)
-    {
+   	{
         document.exitFullscreen();
     }
     else
     {
-        document.querySelector("#CanvasAndControls").requestFullscreen();
-    }
-    }
-    let gui = new dat.GUI();
-    guiControllers.TintRed = gui.add(controlValue, "tintRed");
-    guiControllers.Invert = gui.add(controlValue, "invert");
-    guiControllers.Noise = gui.add(controlValue, "noise");
-    guiControllers.Sepia = gui.add(controlValue, "sepia");
-    guiControllers.High = gui.add(controlValue, "HighShelf");
-    guiControllers.Low = gui.add(controlValue, "LowShelf");
-    guiControllers.Distort = gui.add(controlValue, "Distort");
-    guiControllers.DistortionAmount = gui.add(controlValue, "DistortionAmount",0,100);
-    guiControllers.song = gui.add(controlValue, "song",["Picard","New Adventure","Peanut"]);
-    
-    setupUI();
-    update();
+       document.querySelector("canvas").requestFullscreen();
+   }
+   } 
+	let inputs = document.querySelectorAll("input");
+	let audioDropdown = document.querySelector("select");
+	for(let i = 0; i<inputs.length; i++)
+	{
+		inputs[i].onchange = UpdateValue;
+	}
+	audioDropdown.onchange = UpdateValue;
+	
+	update();
 }
 
 
 function update() { 
   // 8 - this schedules a call to the update() method in 1/60 second
   requestAnimationFrame(update);
+    
+    //ctx.canvas.width = ctx.canvas.parentElement.width;
   // 9 - create a new array of 8-bit integers (0-255)
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
   let data = new Uint8Array(audioNodes.analyserNode.frequencyBinCount); // OR analyserNode.fftSize/2
@@ -56,10 +74,7 @@ function update() {
   audioNodes.analyserNode.getByteFrequencyData(data);
 
   updateVisualization(data, audioNodes.analyserNode.frequencyBinCount);
-  manipulatePixels(ctx);
 }
-
-
 function manipulatePixels(ctx){
 			
 	let imageData = ctx.getImageData(0,0,ctx.canvas.width,ctx.canvas.height);
@@ -71,7 +86,9 @@ function manipulatePixels(ctx){
 	let i;
 	for(i = 0; i<length; i+=4){
 		if(controlValue.tintRed){
-			data[i] = data[i] + 100;
+			data[i] = data[i] + controlValue.tintR;
+			data[i+1] = data[i+1] + controlValue.tintG;
+			data[i+2] = data[i+2] + controlValue.tintB;
 		}
 		if(controlValue.invert)
 		{
@@ -97,6 +114,104 @@ function manipulatePixels(ctx){
 	ctx.putImageData(imageData,0,0);
 			
 }
-import {setupUI,audioNodes} from './AudioControl.js';
-import {updateVisualization} from './VisualModifier.js';
-export {guiControllers,controlValue, ctx, init};
+
+function UpdateValue(e){
+	console.log(e);
+	if(e.target.type == "radio"){
+		if(e.target.name=="AudioEffect"){
+			if(e.target.value == "High")
+			{
+				//Disable All
+				controlValue.Distort = false;
+				controlValue.LowShelf = false;
+				//Enable High
+				controlValue.HighShelf = true;
+				toggleDistortion();
+				toggleHighshelf();
+				toggleLowshelf();
+			}
+			if(e.target.value == "Low")
+			{
+				//Disable All
+				controlValue.Distort = false;
+				controlValue.HighShelf = false;
+				//Enable Low
+				controlValue.LowShelf = true;
+				toggleDistortion();
+				toggleHighshelf();
+				toggleLowshelf();
+			}
+			if(e.target.value == "ValDistort")
+			{
+				//Disable All
+				controlValue.LowShelf = false;
+				controlValue.HighShelf = false;
+				//Enable Low
+				controlValue.Distort = true;
+				toggleDistortion();
+				toggleHighshelf();
+				toggleLowshelf();
+			}
+			if(e.target.value == "off")
+			{
+				//Disable All
+				controlValue.LowShelf = false;
+				controlValue.HighShelf = false;
+				controlValue.Distort = false;
+				toggleDistortion();
+				toggleHighshelf();
+				toggleLowshelf();
+			}
+		}
+	}
+	if(e.target.type == "checkbox"){
+		if(e.target.name=="VizFX"){
+			if(e.target.value =="Tint"){
+				controlValue.tintRed = e.target.checked;
+			}
+			if(e.target.value =="Noise"){
+				controlValue.noise = e.target.checked;
+			}
+			if(e.target.value =="Sepia"){
+				controlValue.sepia = e.target.checked;
+			}
+			if(e.target.value =="Invert"){
+				controlValue.invert = e.target.checked;
+			}
+			if(e.target.value =="Emboss"){
+				controlValue.emboss = e.target.checked;
+			}
+		}
+	}
+	if(e.target.tagName == "SELECT"){
+		document.querySelector("audio").src = e.target.value;
+		document.querySelector("audio").load();
+	}
+	if(e.target.type=="range"){
+		if(e.target.id =="starColorR")
+		{
+			controlValue.tintR = parseInt(e.target.value);
+			e.target.nextElementSibling.innerHTML = controlValue.tintR;
+		}
+		if(e.target.id =="starColorG")
+		{
+			controlValue.tintG = parseInt(e.target.value);
+			e.target.nextElementSibling.innerHTML = controlValue.tintG;
+		}
+		if(e.target.id =="starColorB")
+		{
+			controlValue.tintB = parseInt(e.target.value);
+			e.target.nextElementSibling.innerHTML = controlValue.tintB;
+		}
+		if(e.target.id="distortSlider"){
+			controlValue.DistortionAmount = parseInt(e.target.value);
+			e.target.nextElementSibling.innerHTML = controlValue.DistortionAmount;
+			toggleDistortion();
+		}
+	}
+		
+}
+
+import {audioNodes,toggleDistortion,toggleLowshelf,toggleHighshelf} from './AudioControl.js';
+import {updateVisualization, Reset} from './VisualModifier.js';
+export {controlValue, ctx, init, manipulatePixels};
