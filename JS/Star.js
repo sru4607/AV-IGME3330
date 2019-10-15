@@ -101,13 +101,17 @@ class Star{
 		ctx.fillStyle = this.color;
 		ctx.beginPath();
 		ctx.moveTo(this.x + k, this.y);
-		ctx.quadraticCurveTo(this.x + l, this.y - l, this.x, this.y-k); //QUAD 1
+		ctx.bezierCurveTo(this.x + l, this.y - l,this.x + l, this.y - l, this.x, this.y-k)
+		//ctx.quadraticCurveTo(this.x + l, this.y - l, this.x, this.y-k); //QUAD 1
 		ctx.moveTo(this.x, this.y-k);
-		ctx.quadraticCurveTo(this.x - l , this.y - l, this.x - k, this.y); //QUAD 2
+		ctx.bezierCurveTo(this.x - l , this.y - l,this.x - l , this.y - l, this.x - k, this.y)
+		//ctx.quadraticCurveTo(this.x - l , this.y - l, this.x - k, this.y); //QUAD 2
 		ctx.moveTo(this.x - k,this.y);
-		ctx.quadraticCurveTo(this.x - l, this.y + l, this.x, this.y + k); //QUAD 3
+		ctx.bezierCurveTo(this.x - l, this.y + l,this.x - l, this.y + l, this.x, this.y + k)
+		//ctx.quadraticCurveTo(this.x - l, this.y + l, this.x, this.y + k); //QUAD 3
 		ctx.moveTo(this.x,this.y + k);
-		ctx.quadraticCurveTo(this.x + l, this.y + l, this.x + k, this.y); //QUAD 4
+		ctx.bezierCurveTo(this.x + l, this.y + l,this.x + l, this.y + l, this.x + k, this.y)
+		//ctx.quadraticCurveTo(this.x + l, this.y + l, this.x + k, this.y); //QUAD 4
 		ctx.moveTo(this.x + k, this.y);
 		ctx.closePath();
 		//ctx.fill();

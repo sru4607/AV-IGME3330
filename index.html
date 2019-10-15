@@ -8,20 +8,22 @@
 		<link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet"> 
     </head>
     <body>
-
-            <h1 class="title">
+		<div id='titleText'>
+			<h1 class="title">
                 Super Nova Visualizer
             </h1>
             <h2 class="subtitle">
-                A Audio Visualizer Based on the Game Outer Wilds
+                An Audio Visualizer Based on the Game <i>Outer Wilds</i>
             </h2>	
-            
+		</div>
+		
             <canvas id="mainCanvas" width=1280 height=768></canvas>
 			<audio controls src="media/Audio/Hollow%20Knight%20OST%20-%20Greenpath.mp3"></audio>
 			<button type="button" id="FullScreenToggle">FullScreen</button>
 			<div title="Controls" class="Control-toggle">
 		  <div class="Control-toggle-bar"></div>
 		</div>
+
 		<nav class="Control">
 		  <!-- Checkboxes-->
             	<input type="checkbox" name="VizFX" value="Tint">Tint<br>

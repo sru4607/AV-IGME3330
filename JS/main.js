@@ -19,21 +19,32 @@ let controlValue = {
     DistortionAmount: 50,
     song: "Peanut"   
 };
-
 function init(){
 	//Sets the hamburger menu functionality - code from: https://www.cssscript.com/basic-hamburger-toggle-menu-css-vanilla-javascript/
 	(function() {
-
 		let hamburger = {
 		ControlToggle: document.querySelector('.Control-toggle'),
 		Control: document.querySelector('nav'),
+		isToggled: false,
 
 		doToggle: function(e) {
 			e.preventDefault();
 			this.ControlToggle.classList.toggle('expanded');
 			this.Control.classList.toggle('expanded');
+			this.isToggled = !this.isToggled;
+			switch(this.isToggled){
+				case true:
+					document.querySelector('canvas').style.marginLeft = '400px';
+					document.querySelector('#titleText').style.marginLeft = '400px';
+					break;
+				case false:
+					document.querySelector('canvas').style.marginLeft = '100px';
+					document.querySelector('#titleText').style.marginLeft = '100px';
+					break;
 			}
-		};
+		}
+			
+	};
 
 		hamburger.ControlToggle.addEventListener('click', function(e) { hamburger.doToggle(e); });
 	}());
