@@ -19,7 +19,7 @@ class CircleForm{
         for (let i = 0; i < data.length; i++) {
 			point.x = Math.cos(angle)*(radius + this.spacing+data[i]*0.2);
 			point.y = Math.sin(angle)*(radius + this.spacing+data[i]*0.2);
-			angle += (Math.PI * 2/data.length);
+			angle += (Math.PI * 2/data.length/2);
             if(i == 0)
 			{
 				ctx.moveTo(point.x,point.y);
@@ -28,6 +28,12 @@ class CircleForm{
 			{
 				ctx.lineTo(point.x,point.y);
 			}        
+        }
+		for (let i = data.length-1; i >= 0; i--) {
+			point.x = Math.cos(angle)*(radius + this.spacing+data[i]*0.2);
+			point.y = Math.sin(angle)*(radius + this.spacing+data[i]*0.2);
+			angle += (Math.PI * 2/data.length/2);
+			ctx.lineTo(point.x,point.y);        
         }
 		ctx.closePath();
 		ctx.stroke();

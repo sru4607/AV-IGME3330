@@ -118,7 +118,7 @@ function updateVisualization(data , integerVal) {
 		ctx.beginPath();
 		ctx.rect(0,0,ctx.canvas.width,ctx.canvas.height);
 		ctx.closePath();
-		ctx.strokeStyle = color;
+		ctx.strokeStyle = colorString;
 		ctx.lineWidth = 10;
 		ctx.stroke();
         manipulatePixels(ctx);
