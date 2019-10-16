@@ -36,13 +36,15 @@ body{
 	background-color: #323031;
 }
 h3{
-	color: #72B01D;
+	color: orange;
 }
 button{
-	color: #72B01D;
+	color: orange;
 	position: fixed;
 	top: 20px;
-	right:20px;
+  right:20px;
+  border-radius: 4px;
+  background-color: #323031;
 }
 h1{
 	padding-top: 1%;
@@ -56,11 +58,13 @@ h1{
 
 input[type=checkbox]{
 	width: 24px;
-	height: 24px;
+  height: 24px;
+  color: orange;
 }
 input[type=radio]{
 	width: 24px;
-	height: 24px;
+  height: 24px;
+  color: orange;
 }
 p{
 	display: inline;
@@ -74,16 +78,7 @@ p{
 .blue{
 	color: blue;
 }
-/* css animations
-*/
-@keyframes moveLeft{
-  0% {margin-left: 100px;}
-  100% {margin-left: 400px;}
-}
-@keyframes moveRight{
-  100% {margin-left: 400px;}
-  0% {margin-left: 0%;}
-}
+
 /*
 	Hamburger Menu css from https://www.cssscript.com/basic-hamburger-toggle-menu-css-vanilla-javascript/
 */

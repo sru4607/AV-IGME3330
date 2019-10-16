@@ -1,5 +1,6 @@
 let stars = [];
 let circleForms = [];
+let percentFinished = 0;
 //Initializes the stars
 function initStars() {
     let min = 3;
@@ -43,8 +44,8 @@ function updateVisualization(data , integerVal) {
     if (!audioElement.paused) 
 	{
         let offScreenCtx = new OffscreenCanvas(1000, 1).getContext("2d");
-        let percentFinished = audioElement.currentTime / audioElement.duration;
-
+       
+        percentFinished = audioElement.currentTime / audioElement.duration;;
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -128,7 +129,9 @@ function updateVisualization(data , integerVal) {
 }
 //Resets the visualization for a new song to play
 function Reset(){
-	
+    stars = [];
+    circleForms = [];
+    percentFinished = 0;
 }
 
 import { ctx, manipulatePixels} from "./main.js";
