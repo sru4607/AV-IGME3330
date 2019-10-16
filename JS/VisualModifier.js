@@ -121,6 +121,7 @@ function updateVisualization(data , integerVal) {
 		ctx.strokeStyle = colorString;
 		ctx.lineWidth = 10;
 		ctx.stroke();
+		//Image manipulation
         manipulatePixels(ctx);
 
     }

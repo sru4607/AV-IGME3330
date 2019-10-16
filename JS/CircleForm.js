@@ -4,8 +4,9 @@ class CircleForm{
 		this.startingAngle = angle;
 		this.spacing = spacing;
 	}
+	//Draws the circle at a constant width but at different radiuses from the center circle.
 	draw(ctx,data,radius, color){
-			
+		//Sets it up
 		ctx.save();
         let barWidth = 3;
         let barHeight = 6;
@@ -13,9 +14,11 @@ class CircleForm{
 		let point = {};
 		let angle = this.startingAngle;
 		ctx.translate(ctx.canvas.width/2, ctx.canvas.height/2);
+		//Creates the color string
 		ctx.strokeStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + "," + color[3] + ")";
 		ctx.lineWidth = 3;
 		ctx.beginPath();
+		//Draws the circle
         for (let i = 0; i < data.length; i++) {
 			point.x = Math.cos(angle)*(radius + this.spacing+data[i]*0.2);
 			point.y = Math.sin(angle)*(radius + this.spacing+data[i]*0.2);
@@ -29,6 +32,7 @@ class CircleForm{
 				ctx.lineTo(point.x,point.y);
 			}        
         }
+		//Draws the second half
 		for (let i = data.length-1; i >= 0; i--) {
 			point.x = Math.cos(angle)*(radius + this.spacing+data[i]*0.2);
 			point.y = Math.sin(angle)*(radius + this.spacing+data[i]*0.2);
@@ -39,6 +43,7 @@ class CircleForm{
 		ctx.stroke();
 		ctx.restore();
 	}
+	//Unused but was for drawing the circle at a constant radius but variable width
 	drawWidth(ctx,data,radius,color){
 		ctx.save();
         let barWidth = 3;
@@ -77,4 +82,5 @@ class CircleForm{
 	}
 
 }
+//Exports the class
 export {CircleForm};

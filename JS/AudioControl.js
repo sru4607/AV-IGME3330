@@ -32,6 +32,8 @@ audioNodes.sourceNode.connect(audioNodes.analyserNode);
 audioNodes.analyserNode.connect(audioNodes.distortionFilter);
 
     // https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode
+	
+//Sets up the various filters and distortion effects
 audioNodes.biquadFilter = audioCtx.createBiquadFilter();
 audioNodes.biquadFilter.type = "highshelf";
 
@@ -41,13 +43,14 @@ audioNodes.lowShelfBiquadFilter.type = "lowshelf";
 audioNodes.distortionFilter.connect(audioNodes.biquadFilter);
 audioNodes.biquadFilter.connect(audioNodes.lowShelfBiquadFilter);
 audioNodes.lowShelfBiquadFilter.connect(audioCtx.destination);
-
+//Set the audio element to resume once the user interacts with it
 document.querySelector("audio").onplay = startAudio;
 }
 function startAudio(){
     audioNodes.context.resume();
 	
 }
+//Toggle highself based on the control value
 function toggleHighshelf(){
 
   if(controlValue.HighShelf){
@@ -57,6 +60,7 @@ function toggleHighshelf(){
     audioNodes.biquadFilter.gain.setValueAtTime(0, audioNodes.context.currentTime);
   }
 }
+//Toggles lowshelf based on the control value
 function toggleLowshelf(){
   if(controlValue.LowShelf){
     audioNodes.lowShelfBiquadFilter.frequency.setValueAtTime(1000, audioNodes.context.currentTime);
@@ -65,6 +69,7 @@ function toggleLowshelf(){
     audioNodes.lowShelfBiquadFilter.gain.setValueAtTime(0, audioNodes.context.currentTime);
   }
 }
+//Toggles distortion based on the control value and distortion amount
 function toggleDistortion(){
   if(controlValue.Distort){
     audioNodes.distortionFilter.curve = null; // being paranoid and trying to trigger garbage collection
@@ -82,5 +87,6 @@ function makeDistortionCurve(amount=20) {
   }
   return curve;
 }
+//IMports and exports
 import {controlValue} from "./main.js"
 export {audioNodes,toggleDistortion,toggleHighshelf,toggleLowshelf};

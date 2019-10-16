@@ -9,15 +9,18 @@ class Star{
 		this.toBeDestroyed = false;
         this.color = GetRandomColor();
     }
-    
+    //Draws the star based on the percent the song is through and the data taken from the analyzer node
     draw(percent,data)
     {
+		
 		ctx.beginPath();
+		//Check if the user went back into earlier parts of the song and redraws them if need be
 		if(percent < this.destroyedPercent)
 		{
 			this.destroyed = 0;
 			this.toBeDestroyed = true;
 		}
+		//If the user did go back - draw logic
 		if(this.toBeDestroyed)
 		{
 			if(this.destroyedPercent > percent)
@@ -37,14 +40,17 @@ class Star{
 		}
 		else
 		{
+			//General draw logic
+			//If destroyed
 			if(this.destroyed != 0 && this.destroyed < 5)
 			{
 				this.drawSparkles();
 			}
+			//If not destroyed check if it should be destroyed
 			else if(this.destroyed == 0)
 			{
 				this.drawCircles(data);
-				if((Math.random()*100.0) < percent){
+				if((Math.random()*10000.0) < percent){
 					this.destroyedPercent =percent;
 					this.destroyed = 0.0000001;
 				}	
@@ -56,6 +62,7 @@ class Star{
 				
 		}
     }
+	//Draw the circle based on the radius and location
     drawCircles(data)
     {
         ctx.fillStyle = this.color;
@@ -66,8 +73,10 @@ class Star{
         this.drawRect(data);
         
     }
+	//Draws sparkles upon the destruction
     drawSparkles()
     {
+		//Sets it based on time
         this.destroyed += 0.1;
         let sparkleRadius = this.radius*3;
         let sparkleCount = Math.round(this.radius);
@@ -83,6 +92,7 @@ class Star{
         }
         
 	}
+	//Draws the curves based on the data from the song
 	drawRect(data){
 		
 		//pulse effect
