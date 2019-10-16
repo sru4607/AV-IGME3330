@@ -7,7 +7,7 @@ class Star{
         this.destroyed = 0;
 		this.destroyedPercent = -1;
 		this.toBeDestroyed = false;
-        this.color = GetRandomColor();
+        this.color = getRandomColor();
     }
     //Draws the star based on the percent the song is through and the data taken from the analyzer node
     draw(percent,data)
@@ -131,5 +131,5 @@ class Star{
     
 }
 import {ctx} from "./main.js"
-import {GetRandomColor} from "./Utility.js"
+import {getRandomColor} from "./Utility.js"
 export {Star};

@@ -1,10 +1,21 @@
-Canvas{border:1px solid black;display:block;}
+.container{
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	grid-auto-rows: minmax(100px,auto);
+	grid-gap: 20px;
+}
+Canvas{
+	border:1px solid black;
+	grid-column: 2;
+	grid-row-start: 2 ;
+}
 *{font-family: 'Fjalla One', sans-serif; color: orange}
 .SpanToEdit{margin-right:2em;}
 html,body{
 	height: 100%;
 }
 #distortionSlider{position:relative;top:.7em;}
+#distortionSliderP{position:relative;top:.7em;}
 #audioControls{
 	display: inline;
 }
@@ -51,9 +62,11 @@ h1{
   color:white;
 }
 #titleText{
-  color: white;
-  margin-left: 100px;
-  transition: all 0.5s ease;
+ 	color: white;
+ 	margin-left: 100px;
+  	transition: all 0.5s ease;
+	grid-column: 1/10;
+	grid-row: 1;
 }
 
 input[type=checkbox]{
@@ -78,6 +91,7 @@ p{
 .blue{
 	color: blue;
 }
+
 
 /*
 	Hamburger Menu css from https://www.cssscript.com/basic-hamburger-toggle-menu-css-vanilla-javascript/
