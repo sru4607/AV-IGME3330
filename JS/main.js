@@ -67,9 +67,9 @@ function init(){
 	//For every input and dropdown set onchange method
 	for(let i = 0; i<inputs.length; i++)
 	{
-		inputs[i].onchange = UpdateValue;
+		inputs[i].onchange = updateValue;
 	}
-	audioDropdown.onchange = UpdateValue;
+	audioDropdown.onchange = updateValue;
 	//Start the update loop
 	update();
 }
@@ -143,7 +143,7 @@ function manipulatePixels(ctx){
 			
 }
 //input update method
-function UpdateValue(e){
+function updateValue(e){
 	//if its a radio button with an audio effect toggle all to false but the selected one and then call the needed methods
 	if(e.target.type == "radio"){
 		if(e.target.name=="AudioEffect"){
@@ -235,5 +235,5 @@ function UpdateValue(e){
 }
 //Imports and Exports
 import {audioNodes,toggleDistortion,toggleLowshelf,toggleHighshelf} from './AudioControl.js';
-import {updateVisualization, Reset} from './VisualModifier.js';
+import {updateVisualization, reset} from './VisualModifier.js';
 export {controlValue, ctx, init, manipulatePixels};

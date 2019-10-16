@@ -128,7 +128,7 @@ function updateVisualization(data , integerVal) {
     }
 }
 //Resets the visualization for a new song to play
-function Reset(){
+function reset(){
     stars = [];
     circleForms = [];
     percentFinished = 0;
@@ -138,4 +138,4 @@ import { ctx, manipulatePixels} from "./main.js";
 import { Star } from "./Star.js"
 import {CircleForm} from "./CircleForm.js"
 import {imageBack} from "./Loader.js";
-export { updateVisualization, Reset };
+export { updateVisualization, reset };
