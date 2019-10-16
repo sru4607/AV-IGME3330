@@ -32,12 +32,13 @@ function init(){
 			this.ControlToggle.classList.toggle('expanded');
 			this.Control.classList.toggle('expanded');
 			this.isToggled = !this.isToggled;
+			//move canvas based on if controls are toggled
 			switch(this.isToggled){
-				case true:
+				case true: //toggled
 					document.querySelector('canvas').style.marginLeft = '400px';
 					document.querySelector('#titleText').style.marginLeft = '400px';
 					break;
-				case false:
+				case false: //not toggled
 					document.querySelector('canvas').style.marginLeft = '100px';
 					document.querySelector('#titleText').style.marginLeft = '100px';
 					break;
@@ -64,6 +65,7 @@ function init(){
 	for(let i = 0; i<inputs.length; i++)
 	{
 		inputs[i].onchange = UpdateValue;
+		
 	}
 	audioDropdown.onchange = UpdateValue;
 	
@@ -97,10 +99,10 @@ function manipulatePixels(ctx){
 	let i;
 	for(i = 0; i<length; i+=4){
 		if(controlValue.tintRed){
-			data[i] = data[i] + controlValue.tintR;
-			data[i+1] = data[i+1] + controlValue.tintG;
-			data[i+2] = data[i+2] + controlValue.tintB;
-		}
+			data[i] = data[i] + controlValue.tintR; //red
+			data[i+1] = data[i+1] + controlValue.tintG; //blue
+			data[i+2] = data[i+2] + controlValue.tintB; //green
+		} 
 		if(controlValue.invert)
 		{
 			let red = data[i],green = data[i+1],blue = data[i+2];
@@ -205,6 +207,7 @@ function UpdateValue(e){
 	if(e.target.tagName == "SELECT"){
 		document.querySelector("audio").src = e.target.value;
 		document.querySelector("audio").load();
+		Reset();
 	}
 	if(e.target.type=="range"){
 		if(e.target.id =="starColorR")
