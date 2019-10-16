@@ -225,7 +225,7 @@ function UpdateValue(e){
 			controlValue.tintB = parseInt(e.target.value);
 			e.target.nextElementSibling.innerHTML = controlValue.tintB;
 		}
-		if(e.target.id="distortSlider"){
+		if(e.target.id=="distortSlider"){
 			controlValue.DistortionAmount = parseInt(e.target.value);
 			e.target.nextElementSibling.innerHTML = controlValue.DistortionAmount;
 			toggleDistortion();
