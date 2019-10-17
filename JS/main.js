@@ -214,21 +214,21 @@ function updateValue(e){
 		if(e.target.id =="starColorR")
 		{
 			controlValue.tintR = parseInt(e.target.value);
-			e.target.nextElementSibling.innerHTML = controlValue.tintR;
+			document.querySelector("#redText").innerHTML = controlValue.tintR;
 		}
 		if(e.target.id =="starColorG")
 		{
 			controlValue.tintG = parseInt(e.target.value);
-			e.target.nextElementSibling.innerHTML = controlValue.tintG;
+			document.querySelector("#greenText").innerHTML = controlValue.tintG;
 		}
 		if(e.target.id =="starColorB")
 		{
 			controlValue.tintB = parseInt(e.target.value);
-			e.target.nextElementSibling.innerHTML = controlValue.tintB;
+			document.querySelector("#blueText").innerHTML = controlValue.tintB;
 		}
 		if(e.target.id=="distortSlider"){
 			controlValue.DistortionAmount = parseInt(e.target.value);
-			e.target.nextElementSibling.innerHTML = controlValue.DistortionAmount;
+			document.querySelector("#distortText").innerHTML = controlValue.DistortionAmount;
 			toggleDistortion();
 		}
 	}
