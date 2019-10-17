@@ -17,43 +17,68 @@
                 An Audio Visualizer Based on the Game <i>Outer Wilds</i>
             </h2>	
 		</div>
+	</div>
 		
             <canvas id="mainCanvas" width=1280 height=768></canvas>
-			<audio controls src="media/Audio/Hollow%20Knight%20OST%20-%20Greenpath.mp3"></audio>
-			<button type="button" id="FullScreenToggle">FullScreen</button>
-			<div title="Controls" class="Control-toggle">
-		  <div class="Control-toggle-bar"></div>
+		<audio controls src="media/Audio/Hollow%20Knight%20OST%20-%20Greenpath.mp3"></audio>
+		<button type="button" id="FullScreenToggle">FullScreen</button>
+		<div title="Controls" class="Control-toggle">
+		  	<div class="Control-toggle-bar"></div>
 		</div>
 
 		<nav class="Control">
-				<!-- Checkboxes-->
-					  <input type="checkbox" name="VizFX" value="Tint">Tint<br>
-					  <input type="range" min="0" max="255" value="125" class="slider" id="starColorR"><p class="red">125</p><br>
-					  <input type="range" min="0" max="255" value="125" class="slider" id="starColorG"><p class="green">125</p><br>
-					  <input type="range" min="0" max="255" value="125" class="slider" id="starColorB"><p class="blue">125</p><br>
-					  <input type="checkbox" name="VizFX" value="Noise">Noise<br>
-					  <input type="checkbox" name="VizFX" value="Sepia">Sepia<br>
-					  <input type="checkbox" name="VizFX" value="Invert">Invert<br>
-					  <input type="checkbox" name="VizFX" value="Emboss">Emboss<br>
-					  
-					  <br>
-					  <!-- Radio Buttons-->
-					  <input type="radio" name="AudioEffect" value="High">High<br>
-					  <input type="radio" name="AudioEffect" value="Low">Low<br>
-					  <input type="radio" name="AudioEffect" value="ValDistort">Distort<br>
-					  <input type="range" min="0" max="250" value="50" class="slider" id="distortSlider"><p id="distortSliderP">50</p><br>
-					  <input type="radio" name="AudioEffect" value="off" checked>No Effect<br>
-					  <br>
-						 <!--Dropdown-->
-						 <select>
-							 <option value="media/Audio/Mid-Air_Machine_-_Where_From.mp3">Mid-Air Machine</option>
-							 <option value="media/Audio/BM_-_Adoleschia_Aug2017.flac">Adoleschia</option>
-							 <option value="media/Audio/02%20Ratio%20Schmatio.mp3">Ratio Schmatio</option>
-							 <option value="media/Audio/Hollow%20Knight%20OST%20-%20Greenpath.mp3" selected>Greenpath</option>
-							 <option value="media/Audio/New%20Adventure%20Theme.mp3">New Adventure</option>
-							 <option value="media/Audio/Peanuts%20Theme.mp3">Peanuts</option>
-							 <option value="media/Audio/The%20Picard%20Song.mp3">Picard</option>
-						 </select>
+			<div class='gridContainer'>
+				<div class='gridItem'><input type="checkbox" name="VizFX" value="Tint" id='tint'></div>
+				<div class='gridItem'><span>Tint</span></div>
+				<div></div>
+				<div></div>
+				<div class="gridItem"><input type="range" min="0" max="255" value="125" class="slider" id="starColorR"></div>
+				<div class='gridItem'><p class="red">125</p></div>
+				<div></div>
+				<div class="gridItem"><input type="range" min="0" max="255" value="125" class="slider" id="starColorG"></div>
+				<div class='gridItem'><p class="green">125</p></div>
+				<div></div>
+				<div class='gridItem'><input type="range" min="0" max="255" value="125" class="slider" id="starColorB"></div>
+				<div class='gridItem'><p class="blue">125</p></div>
+
+				<div class='gridItem'> <input type="checkbox" name="VizFX" value="Noise" id='noise'></div>
+				<div class='gridItem'><span>Noise</span></div>
+				<div></div>
+				<div class='gridItem'> <input type="checkbox" name="VizFX" value="Invert" id='invert'></div>
+				<div class='gridItem'><span>Invert</span></div>
+				<div></div>
+				<div class='gridItem'><input type="checkbox" name="VizFX" value="Emboss" id='emboss'></div>
+				<div class='gridItem'><span>Emboss</span></div>
+				<div></div>
+			
+				<div class='gridItem'><input type="radio" name="AudioEffect" value="High"></div>
+				<div class='gridItem'><span>High</span></div>
+				<div></div>
+				<div class='gridItem'><input type="radio" name="AudioEffect" value="Low"></div>
+				<div class='gridItem'><span>Low</span></div>
+				<div></div>
+				<div class='gridItem'><input type="radio" name="AudioEffect" value="ValDistort"></div>
+				<div class='gridItem'><span>Distort</span></div>
+				<div></div>
+				<div></div>
+				<div class='gridItem'><input type="range" min="0" max="250" value="50" class="slider" id="distortSlider"></div>
+				<div class ='gridItem'><p id="distortSliderP">50</p></div>
+				<div class='gridItem'><input type="radio" name="AudioEffect" value="off" checked></div>
+				<div class='gridItem'><span>No Effect</span></div>
+				<div></div>
+				
+				<div class='gridItem'> <select>
+						<option value="media/Audio/Mid-Air_Machine_-_Where_From.mp3">Mid-Air Machine</option>
+						<option value="media/Audio/BM_-_Adoleschia_Aug2017.flac">Adoleschia</option>
+						<option value="media/Audio/02%20Ratio%20Schmatio.mp3">Ratio Schmatio</option>
+						<option value="media/Audio/Hollow%20Knight%20OST%20-%20Greenpath.mp3" selected>Greenpath</option>
+						<option value="media/Audio/New%20Adventure%20Theme.mp3">New Adventure</option>
+						<option value="media/Audio/Peanuts%20Theme.mp3">Peanuts</option>
+						<option value="media/Audio/The%20Picard%20Song.mp3">Picard</option>
+					</select>
+				</div>
+				<div class='gridItem'><span>Song</span></div>
+			</div>
 			  </nav>
     </div>
 

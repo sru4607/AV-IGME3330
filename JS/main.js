@@ -33,7 +33,7 @@ function init(){
 			this.ControlToggle.classList.toggle('expanded');
 			this.Control.classList.toggle('expanded');
 			this.isToggled = !this.isToggled;
-			switch(this.isToggled){
+			switch(this.isToggled){ //move canvas and text 
 				case true:
 					document.querySelector('canvas').style.marginLeft = '400px';
 					document.querySelector('#titleText').style.marginLeft = '400px';

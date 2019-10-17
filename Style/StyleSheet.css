@@ -2,12 +2,14 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	grid-auto-rows: minmax(100px,auto);
-	grid-gap: 20px;
+  grid-gap: 20px;
+ 
 }
 Canvas{
 	border:1px solid black;
 	grid-column: 2;
-	grid-row-start: 2 ;
+  grid-row-start: 2 ;
+  
 }
 *{font-family: 'Fjalla One', sans-serif; color: orange}
 .SpanToEdit{margin-right:2em;}
@@ -59,12 +61,12 @@ button{
 }
 h1{
 	padding-top: 1%;
-  color:white;
+  color:#EAEAEA;
 }
 #titleText{
- 	color: white;
+ 	color: #EAEAEA;
  	margin-left: 100px;
-  	transition: all 0.5s ease;
+  transition: all 0.5s ease;
 	grid-column: 1/10;
 	grid-row: 1;
 }
@@ -79,6 +81,9 @@ input[type=radio]{
   height: 24px;
   color: orange;
 }
+input[type=range]{
+  width:75%;
+}
 p{
 	display: inline;
 }
@@ -91,7 +96,21 @@ p{
 .blue{
 	color: blue;
 }
+.gridContainer {
+  display:grid;
+  grid-template-columns: auto auto auto;
+  text-align: center;
+  row-gap: 2px;
 
+}
+.gridItem{
+  display: inline-grid;
+  padding-left: 3px;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+select{
+  background-color: #323031;
+}
 
 /*
 	Hamburger Menu css from https://www.cssscript.com/basic-hamburger-toggle-menu-css-vanilla-javascript/
@@ -100,7 +119,7 @@ p{
 .Control {
   transition: left 0.5s ease;
   background: #323031;
-  color: white;
+  color: #EAEAEA;
   cursor: pointer;
   font-size: 2rem;
   height: 100vh;
@@ -139,7 +158,7 @@ p{
   top: 50%;
   transform: translateY(-50%);
   transition: all 0.5s ease;
-  background: white;
+  background: #EAEAEA;
   content: '';
   height: 0.4rem;
   width: 100%;
@@ -154,7 +173,7 @@ p{
 .Control-toggle.expanded .Control-toggle-bar { background: transparent; }
 
 .Control-toggle.expanded .Control-toggle-bar::after, .Control-toggle.expanded .Control-toggle-bar::before {
-  background: white;
+  background: #EAEAEA;
   margin-top: 0;
 }
 
