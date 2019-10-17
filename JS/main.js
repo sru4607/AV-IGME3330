@@ -207,6 +207,7 @@ function updateValue(e){
 	if(e.target.tagName == "SELECT"){
 		document.querySelector("audio").src = e.target.value;
 		document.querySelector("audio").load();
+		reset();
 	}
 	//If it is a range store the new value and update the displayed text
 	if(e.target.type=="range"){
