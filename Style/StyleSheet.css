@@ -184,3 +184,13 @@ select{
 .Control-toggle.expanded .Control-toggle-bar::before {
   transform: rotate(-45deg);
 }
+
+@media screen and (max-width: 768px){
+  canvas{
+    width: 640px;
+    height: 384px;
+  }
+  .gridContainer{
+    font-size: 80%;
+  }
+}
